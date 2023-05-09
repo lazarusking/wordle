@@ -13,6 +13,7 @@
   /*#232a3e fae790 fdd835 #807b7b f5d238 232ea2 424874 364f6b*/
   --word-color: #fae790;
   --background: theme(colors.slate.900);
+  --text-color: theme(colors.white);
   --button-border: 1px solid #feb6b6;
   --button-border-1: 2px solid #807b7b;
   --button-border-2: 2px solid #353f5a;
