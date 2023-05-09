@@ -1,0 +1,335 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark light;
+  --cell-width: 5;
+  --cell-height: 6;
+  --color-exists: theme(colors.yellow.500);
+  --color-absent: #3d4054;
+  --color-correct: #79b851;
+  --background-blue: #8da5e8;
+  /*#232a3e fae790 fdd835 #807b7b f5d238 232ea2 424874 364f6b*/
+  --word-color: #fae790;
+  --background: theme(colors.slate.900);
+  --button-border: 1px solid #feb6b6;
+  --button-border-1: 2px solid #807b7b;
+  --button-border-2: 2px solid #353f5a;
+  --keyboard-button: transparent;
+
+  --border-typed-color: 2px solid #8da5e8;
+  --button-color: rgba(0, 0, 0, 0.5);
+  --button-color-3: theme(colors.slate.500);
+  --button-color-1: rgba(16, 34, 34, 0.5);
+  --button-color-2: rgba(167, 34, 34, 0.5);
+  --info-modal-shade: #313448;
+}
+.light {
+  --background: #fff;
+  --text-color: theme(colors.slate.800);
+  --keyboard-button: theme(colors.slate.300);
+
+  /*rgb(65,74,94) theme(colors.blue.900); */
+  --border-typed-color: 2px solid #807b7b;
+  /* --button-border-2: 2px solid #f5cfcf; */
+  --button-border-2: 2px solid theme(colors.slate.300);
+  --button-color: rgba(247, 231, 231, 0.5);
+  --button-color-3: theme(colors.slate.200);
+  --info-modal-shade: theme(colors.slate.200);
+}
+.high-contrast {
+  --color-exists: theme(colors.sky.500);
+  --color-correct: theme(colors.orange.500);
+}
+/* .dark {
+
+} */
+
+html {
+  height: -webkit-fill-available;
+
+  /* -webkit-tap-highlight-color: transparent; */
+}
+body {
+  /* width: 100%; */
+  width: 100%;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+  /* min-height: -webkit-fill-available; */
+  background: var(--background);
+  margin: 0;
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+}
+
+main {
+  display: flex;
+  margin: 0 auto;
+  max-width: 1260px;
+  height: 100%;
+  align-items: center;
+}
+.app-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  /* height: 80%; */
+  font-weight: 700;
+  color: var(--text-color);
+}
+.app-container,
+.simple-keyboard {
+  /* max-width: 600px; */
+}
+
+.game-rows {
+  display: grid;
+  grid-auto-rows: 3rem;
+  position: relative;
+  color: white;
+  font-size: 1.75rem;
+  padding: 0.5rem 0;
+  text-transform: uppercase;
+  border-radius: 0;
+  gap: 0.3rem;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(var(--cell-height), 3rem);
+  grid-auto-rows: 2.8rem;
+  /* height: 100vh; */
+  justify-content: center;
+}
+
+.white-score > span:last-child {
+  color: white;
+}
+.info-shade {
+  background-color: var(--info-modal-shade);
+}
+.fake {
+  /* visibility:hidden; */
+  position: absolute;
+  opacity: 0;
+  width: 0px;
+  height: 0;
+}
+
+.row-letters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 3.3rem));
+  grid-auto-columns: minmax(3rem, 1fr);
+  width: 100%;
+  gap: 0.3rem;
+  padding: 0 2rem;
+  margin-left: auto;
+  justify-content: center;
+  pointer-events: none;
+  user-select: none;
+}
+
+.row-letters div,
+input {
+  /* display: flex;
+    justify-content: center;
+    align-items: center; */
+  text-align: center;
+  /* border-radius: 0.01rem; */
+  /* background-color: var(--word-color); */
+  /* box-shadow: 0.1rem 0.15rem 0 #ff8f00; */
+  caret-color: transparent;
+  background-color: transparent;
+  color: var(--text-color);
+  border-radius: 5px;
+  border: var(--button-border-2);
+  outline: transparent;
+}
+
+.exists {
+  background: var(--color-exists) !important;
+  border: transparent !important;
+  color: white;
+}
+.correct {
+  background: var(--color-correct) !important;
+  border: transparent !important;
+  color: white;
+}
+.absent {
+  background: var(--color-absent) !important;
+  border: transparent !important;
+  color: white;
+}
+
+.disabled > input {
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Keyboard */
+.simple-keyboard.wordleTheme {
+  background-color: transparent;
+  border-radius: 0;
+  border: 0;
+  display: grid;
+  align-items: end;
+  padding-bottom: 0.5rem;
+}
+
+.simple-keyboard.wordleTheme .hg-button {
+  height: 58px;
+  margin: 0;
+  font-size: initial;
+  text-transform: capitalize;
+  background: var(--keyboard-button);
+  /* color: var(--text-color); */
+  border: var(--button-border-2);
+  @apply text-sm active:bg-gray-400;
+}
+.hg-button.hg-button-backspace {
+  padding: 0;
+}
+.hg-button span svg {
+  height: 34px;
+  margin: 0;
+  font-size: initial;
+  text-transform: capitalize;
+  background: var(--keyboard-button);
+  /* color: var(--text-color); */
+  border: none;
+  @apply text-sm active:bg-gray-400;
+}
+
+/* Animation */
+@keyframes pop {
+  0% {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  40% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+@keyframes stretch {
+  0% {
+    transform: scaleX(0);
+    /* opacity: 0; */
+  }
+  40% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+@keyframes jiggle {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-0.5rem, 0);
+  }
+  50% {
+    transform: translate(0.5rem, 0);
+  }
+  75% {
+    transform: translate(-0.5rem, 0);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+.jiggle {
+  animation: jiggle linear 300ms;
+}
+.cell-reveal {
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-fill-mode: backwards;
+  /* animation-name: revealPresentCharCell; */
+}
+@keyframes offsetLetterFlip {
+  0% {
+    transform: rotateX(0deg);
+  }
+  100% {
+    transform: rotateX(180deg);
+  }
+}
+@keyframes letterFlip {
+  0% {
+    transform: rotateX(0deg);
+  }
+  50% {
+    transform: rotateX(-90deg);
+  }
+  70% {
+    transform: rotateX(-50deg);
+  }
+  100% {
+    transform: rotateX(0deg);
+  }
+}
+
+.cell-reveal.absent {
+  animation-name: letterFlip;
+}
+
+.cell-reveal.exists {
+  animation-name: letterFlip;
+}
+
+.cell-reveal.correct {
+  animation-name: letterFlip;
+}
+.cell-reveal.letter-container {
+  animation: offsetLetterFlip 0.35s linear;
+  animation-fill-mode: backwards;
+}
+
+input[data-animate="pop"] {
+  animation: pop 0.3s ease-in-out;
+  border: var(--border-typed-color);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .pop {
+    animation: pop 1.3s cubic-bezier(0.785, 0.135, 0.15, 0.86) alternate
+      backwards;
+    counter-increment: cells;
+    /* animation-name: none; */
+  }
+
+  .cell-reveal:nth-child(1) {
+    animation-delay: 0s;
+  }
+  .cell-reveal:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+  .cell-reveal:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+  .cell-reveal:nth-child(4) {
+    animation-delay: 0.3s;
+  }
+  .cell-reveal:nth-child(5) {
+    animation-delay: 0.4s;
+  }
+  /* .row-letters:nth-of-type(2n + 1) {
+    animation: pop 1.3s cubic-bezier(0.785, 0.135, 0.15, 0.86) 0.2s alternate
+      backwards;
+  }
+  .row-letters:nth-of-type(2n) {
+    animation: pop 1.3s cubic-bezier(0.215, 0.61, 0.355, 1) 0.1s alternate
+      backwards;
+  } */
+  /* .simple-keyboard {
+    animation: stretch 1.3s cubic-bezier(0.215, 0.61, 0.355, 1) 0.1s alternate
+      backwards;
+  } */
+}

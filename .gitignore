@@ -1,0 +1,6 @@
+node_modules
+dist
+**/unused
+vanilla js/
+**/*cache*/
+.vscode/
