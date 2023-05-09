@@ -199,9 +199,8 @@ export default function KeyboardComponent({
         break;
     }
 
-    console.debug(keyboard.current.getAllInputs());
-
-    console.debug("Input changed", input);
+    // console.debug(keyboard.current.getAllInputs());
+    // console.debug("Input changed", input);
   };
 
   return (
